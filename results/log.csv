@@ -1,0 +1,7 @@
+variant,shape,p50_ms,tflops,bottleneck,change_made
+reference_cpu,4096x4096x4096,182000.0,0.00075,n/a,baseline oracle
+naive_cuda,4096x4096x4096,412.6,0.333,memory bound: uncoalesced loads,first working kernel
+coalesced,4096x4096x4096,96.4,1.426,memory bound: low arithmetic intensity,transposed access pattern
+tiled_32,4096x4096x4096,24.1,5.703,compute bound: fp32 pipe saturated,shared memory tiling
+tensor_core,4096x4096x4096,7.8,17.622,near roofline,wmma fp16 with fp32 accumulate
+cublas_baseline,4096x4096x4096,6.9,19.921,library reference,cuBLAS SGEMM
